@@ -38,7 +38,7 @@ $${omna_INCLUDEPATH} \
 sonyd_DEFINES += \
 $${omna_DEFINES} \
 DEFAULT_LOGGING_LEVELS_ERROR \
-XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_INSTANCE \
+XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE \
 
 ########################################################################
 # sonyd OBJECTIVE_HEADERS
@@ -55,19 +55,43 @@ XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_INSTANCE \
 # sonyd HEADERS
 #
 sonyd_HEADERS += \
+$${OMNA_SRC}/xos/app/console/lib/rete/version/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/lib/rete/version/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/sockets/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/sockets/os/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/os/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/sockets/server/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/server/main.hpp \
+\
 $${OMNA_SRC}/xos/app/console/protocol/http/base/main_opt.hpp \
 $${OMNA_SRC}/xos/app/console/protocol/http/base/main.hpp \
 \
 $${OMNA_SRC}/xos/app/console/protocol/http/server/main_opt.hpp \
 $${OMNA_SRC}/xos/app/console/protocol/http/server/main.hpp \
 \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/server/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/server/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/protocol/sony/audio/control/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/sony/audio/control/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/protocol/sony/audio/control/server/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/sony/audio/control/server/main.hpp \
+\
 $${NADIR_SRC}/xos/console/main_main.hpp \
 
 # sonyd SOURCES
 #
 sonyd_SOURCES += \
-$${OMNA_SRC}/xos/app/console/protocol/http/server/main_opt.cpp \
-$${OMNA_SRC}/xos/app/console/protocol/http/server/main.cpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/sony/audio/control/server/main_opt.cpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/sony/audio/control/server/main.cpp \
 \
 $${NADIR_SRC}/xos/console/main_main.cpp \
 
