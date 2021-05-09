@@ -16,14 +16,16 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 5/3/2021
+///   Date: 5/8/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_HPP
-#define XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_HPP
+#ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_HPP
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_HPP
 
-#include "xos/network/protocol/sony/audio/control/server/main_opt.hpp"
+#include "xos/app/console/network/protocol/sony/audio/control/server/main_opt.hpp"
 
 namespace xos {
+namespace app {
+namespace console {
 namespace network {
 namespace protocol {
 namespace sony {
@@ -33,7 +35,7 @@ namespace server {
 
 /// class maint
 template 
-<class TExtends = main_opt, 
+<class TExtends = console::network::protocol::sony::audio::control::server::main_optt<>, 
  class TImplements = typename TExtends::implements>
 
 class exported maint: virtual public TImplements, public TExtends {
@@ -65,7 +67,62 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
+    typedef typename extends::content_type_t content_type_t;
+    typedef typename extends::content_type_which_t content_type_which_t;
+    typedef typename extends::content_type_header_t content_type_header_t;
+    typedef typename extends::content_length_header_t content_length_header_t;
+    typedef typename extends::content_t content_t;
+
+    typedef typename extends::response_status_t response_status_t;
+    typedef typename extends::response_reason_t response_reason_t;
+    typedef typename extends::response_line_t response_line_t;
+    typedef typename extends::response_t response_t;
+
+    typedef typename extends::request_method_t request_method_t;
+    typedef typename extends::request_resource_t request_resource_t;
+    typedef typename extends::request_line_t request_line_t;
+    typedef typename extends::request_t request_t;
+
+    /// ...send_response
+    virtual int after_send_response(xos::network::sockets::interface& cn, response_t& response, int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        response_t& before_response = this->before_response();
+        response.set(before_response);
+        return err;
+    }
+
+    /// ...recv_request
+    virtual int before_recv_request(request_t& request, xos::network::sockets::interface& cn, int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        response_t& response = this->response();
+        response_t& before_response = this->before_response();
+        before_response.set(response);
+        return err;
+    }
+
+    /// ...process_request...
+    virtual int before_process_request(request_t& request, reader_t& reader, int argc, char_t** argv, char** env) {
+        int err = 0;
+        size_t length = 0;
+        const char_t* chars = 0;
+        if ((chars = request.content_chars(length))) {
+            response_t& response = this->response();
+
+            response.set_content(chars, length);
+            response.set_content_length(length);
+            if ((chars = request.content_type_chars(length))) {
+                response.set_content_type(chars, length);
+            }
+        }
+        return err;
+    }
+
+    virtual response_t& before_response() const {
+        return (response_t&)before_response_;
+    }
+
 protected:
+    response_t before_response_;
 }; /// class maint
 typedef maint<> main;
 
@@ -75,6 +132,8 @@ typedef maint<> main;
 } /// namespace sony
 } /// namespace protocol
 } /// namespace network
+} /// namespace console
+} /// namespace app
 } /// namespace xos
 
-#endif /// ndef XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_HPP
+#endif /// ndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_HPP

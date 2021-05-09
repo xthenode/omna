@@ -16,34 +16,28 @@
 ///   File: main.cpp
 ///
 /// Author: $author$
-///   Date: 5/8/2021
+///   Date: 5/6/2021
 ///////////////////////////////////////////////////////////////////////
-#include "xos/app/console/network/protocol/sony/audio/control/server/main.hpp"
+#include "xos/app/console/network/sockets/base/main.hpp"
 
-#if !defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE)
-///#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE
-#endif /// !defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_NSTANCE)
+#if !defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_INSTANCE)
+///#define XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_INSTANCE
+#endif /// !defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_NSTANCE)
 
 namespace xos {
 namespace app {
 namespace console {
 namespace network {
-namespace protocol {
-namespace sony {
-namespace audio {
-namespace control {
-namespace server {
+namespace sockets {
+namespace base {
 
 /// class main
-#if defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE)
+#if defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_INSTANCE)
 static main the_main;
-#endif /// defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE)
+#endif /// defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_INSTANCE)
 
-} /// namespace server
-} /// namespace control
-} /// namespace audio
-} /// namespace sony
-} /// namespace protocol
+} /// namespace base
+} /// namespace sockets
 } /// namespace network
 } /// namespace console
 } /// namespace app

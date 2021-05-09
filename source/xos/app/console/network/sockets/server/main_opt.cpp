@@ -13,37 +13,31 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.cpp
+///   File: main_opt.cpp
 ///
 /// Author: $author$
-///   Date: 5/8/2021
+///   Date: 5/6/2021
 ///////////////////////////////////////////////////////////////////////
-#include "xos/app/console/network/protocol/sony/audio/control/server/main.hpp"
+#include "xos/app/console/network/sockets/server/main_opt.hpp"
 
-#if !defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE)
-///#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE
-#endif /// !defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_NSTANCE)
+#if !defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPT_INSTANCE)
+///#define XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPT_INSTANCE
+#endif /// !defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPT_INSTANCE)
 
 namespace xos {
 namespace app {
 namespace console {
 namespace network {
-namespace protocol {
-namespace sony {
-namespace audio {
-namespace control {
+namespace sockets {
 namespace server {
 
-/// class main
-#if defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE)
-static main the_main;
-#endif /// defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_INSTANCE)
+/// class main_optt
+#if defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPT_INSTANCE)
+static main_opt the_main_opt;
+#endif /// defined(XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPT_INSTANCE)
 
 } /// namespace server
-} /// namespace control
-} /// namespace audio
-} /// namespace sony
-} /// namespace protocol
+} /// namespace sockets
 } /// namespace network
 } /// namespace console
 } /// namespace app

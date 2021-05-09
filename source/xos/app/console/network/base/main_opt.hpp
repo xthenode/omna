@@ -13,37 +13,32 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.hpp
+///   File: main_opt.hpp
 ///
 /// Author: $author$
-///   Date: 5/5/2021
+///   Date: 5/6/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_HPP
-#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_HPP
+#ifndef XOS_APP_CONSOLE_NETWORK_BASE_MAIN_OPT_HPP
+#define XOS_APP_CONSOLE_NETWORK_BASE_MAIN_OPT_HPP
 
-#include "xos/app/console/protocol/http/server/main_opt.hpp"
-#include "xos/protocol/http/request/method/nameof.hpp"
-#include "xos/protocol/http/request/resource/identifier.hpp"
-#include "xos/protocol/http/request/line.hpp"
-#include "xos/protocol/http/request/message.hpp"
+#include "xos/app/console/lib/rete/version/main.hpp"
 
 namespace xos {
 namespace app {
 namespace console {
-namespace protocol {
-namespace http {
-namespace server {
+namespace network {
+namespace base {
 
-/// class maint
+/// class main_optt
 template 
-<class TExtends = console::protocol::http::server::main_optt<>, 
+<class TExtends = console::lib::rete::version::maint<>, 
  class TImplements = typename TExtends::implements>
 
-class exported maint: virtual public TImplements, public TExtends {
+class exported main_optt: virtual public TImplements, public TExtends {
 public:
     typedef TImplements implements;
     typedef TExtends extends;
-    typedef maint derives;
+    typedef main_optt derives;
 
     typedef typename extends::char_t char_t;
     typedef typename extends::end_char_t end_char_t;
@@ -54,12 +49,12 @@ public:
     typedef typename extends::file_t file_t;
 
     /// constructor / destructor
-    maint() {
+    main_optt() {
     }
-    virtual ~maint() {
+    virtual ~main_optt() {
     }
 private:
-    maint(const maint& copy) {
+    main_optt(const main_optt& copy) {
         throw exception(exception_unexpected);
     }
 
@@ -68,37 +63,21 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
-    typedef typename extends::content_type_t content_type_t;
-    typedef typename extends::content_type_which_t content_type_which_t;
-    typedef typename extends::content_type_header_t content_type_header_t;
-    typedef typename extends::content_length_header_t content_length_header_t;
-    typedef typename extends::content_t content_t;
-
-    typedef typename extends::response_status_t response_status_t;
-    typedef typename extends::response_reason_t response_reason_t;
-    typedef typename extends::response_line_t response_line_t;
-    typedef typename extends::response_t response_t;
-
-    typedef xos::protocol::http::request::method::name request_method_t;
-    typedef xos::protocol::http::request::resource::identifier request_resource_t;
-    typedef xos::protocol::http::request::line request_line_t;
-    typedef xos::protocol::http::request::message request_t;
-
-    /// request...
-    virtual request_t& request() const {
-        return (request_t&)request_;
+    /// ...run
+    virtual int default_run(int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        err = this->usage(argc, argv, env);
+        return err;
     }
 
 protected:
-    request_t request_;
-}; /// class maint
-typedef maint<> main;
+}; /// class main_optt
+typedef main_optt<> main_opt;
 
-} /// namespace server
-} /// namespace http
-} /// namespace protocol
+} /// namespace base
+} /// namespace network
 } /// namespace console
 } /// namespace app
 } /// namespace xos
 
-#endif /// ndef XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_HPP
+#endif /// ndef XOS_APP_CONSOLE_NETWORK_BASE_MAIN_OPT_HPP

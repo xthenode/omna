@@ -16,15 +16,17 @@
 ///   File: main_opt.cpp
 ///
 /// Author: $author$
-///   Date: 5/3/2021
+///   Date: 5/8/2021
 ///////////////////////////////////////////////////////////////////////
-#include "xos/network/protocol/sony/audio/control/server/main_opt.hpp"
+#include "xos/app/console/network/protocol/sony/audio/control/server/main_opt.hpp"
 
-#if !defined(XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
-///#define XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE
-#endif /// !defined(XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
+#if !defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
+///#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE
+#endif /// !defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
 
 namespace xos {
+namespace app {
+namespace console {
 namespace network {
 namespace protocol {
 namespace sony {
@@ -33,9 +35,9 @@ namespace control {
 namespace server {
 
 /// class main_optt
-#if defined(XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
+#if defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
 static main_opt the_main_opt;
-#endif /// defined(XOS_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
+#endif /// defined(XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_SERVER_MAIN_OPT_INSTANCE)
 
 } /// namespace server
 } /// namespace control
@@ -43,4 +45,6 @@ static main_opt the_main_opt;
 } /// namespace sony
 } /// namespace protocol
 } /// namespace network
+} /// namespace console
+} /// namespace app
 } /// namespace xos

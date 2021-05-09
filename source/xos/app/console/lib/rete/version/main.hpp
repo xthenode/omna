@@ -16,27 +16,23 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 5/5/2021
+///   Date: 5/6/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_HPP
-#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_HPP
+#ifndef XOS_APP_CONSOLE_LIB_RETE_VERSION_MAIN_HPP
+#define XOS_APP_CONSOLE_LIB_RETE_VERSION_MAIN_HPP
 
-#include "xos/app/console/protocol/http/server/main_opt.hpp"
-#include "xos/protocol/http/request/method/nameof.hpp"
-#include "xos/protocol/http/request/resource/identifier.hpp"
-#include "xos/protocol/http/request/line.hpp"
-#include "xos/protocol/http/request/message.hpp"
+#include "xos/app/console/lib/rete/version/main_opt.hpp"
 
 namespace xos {
 namespace app {
 namespace console {
-namespace protocol {
-namespace http {
-namespace server {
+namespace lib {
+namespace rete {
+namespace version {
 
 /// class maint
 template 
-<class TExtends = console::protocol::http::server::main_optt<>, 
+<class TExtends = xos::app::console::lib::rete::version::main_optt<>, 
  class TImplements = typename TExtends::implements>
 
 class exported maint: virtual public TImplements, public TExtends {
@@ -68,37 +64,15 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
-    typedef typename extends::content_type_t content_type_t;
-    typedef typename extends::content_type_which_t content_type_which_t;
-    typedef typename extends::content_type_header_t content_type_header_t;
-    typedef typename extends::content_length_header_t content_length_header_t;
-    typedef typename extends::content_t content_t;
-
-    typedef typename extends::response_status_t response_status_t;
-    typedef typename extends::response_reason_t response_reason_t;
-    typedef typename extends::response_line_t response_line_t;
-    typedef typename extends::response_t response_t;
-
-    typedef xos::protocol::http::request::method::name request_method_t;
-    typedef xos::protocol::http::request::resource::identifier request_resource_t;
-    typedef xos::protocol::http::request::line request_line_t;
-    typedef xos::protocol::http::request::message request_t;
-
-    /// request...
-    virtual request_t& request() const {
-        return (request_t&)request_;
-    }
-
 protected:
-    request_t request_;
 }; /// class maint
 typedef maint<> main;
 
-} /// namespace server
-} /// namespace http
-} /// namespace protocol
+} /// namespace version
+} /// namespace rete
+} /// namespace lib
 } /// namespace console
 } /// namespace app
 } /// namespace xos
 
-#endif /// ndef XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_HPP
+#endif /// ndef XOS_APP_CONSOLE_LIB_RETE_VERSION_MAIN_HPP
