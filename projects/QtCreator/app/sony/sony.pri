@@ -55,6 +55,27 @@ XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_INSTANCE \
 # sony HEADERS
 #
 sony_HEADERS += \
+$${OMNA_SRC}/xos/app/console/protocol/http/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/protocol/http/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/protocol/http/client/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/protocol/http/client/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/sockets/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/sockets/os/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/os/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/sockets/client/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/client/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/protocol/http/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/protocol/http/client/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/client/main.hpp \
+\
 $${OMNA_SRC}/xos/app/console/protocol/sony/audio/control/base/main_opt.hpp \
 $${OMNA_SRC}/xos/app/console/protocol/sony/audio/control/base/main.hpp \
 \

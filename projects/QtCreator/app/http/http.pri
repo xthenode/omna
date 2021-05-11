@@ -38,7 +38,7 @@ $${omna_INCLUDEPATH} \
 http_DEFINES += \
 $${omna_DEFINES} \
 DEFAULT_LOGGING_LEVELS_ERROR \
-XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_MAIN_INSTANCE \
+XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_INSTANCE \
 
 ########################################################################
 # http OBJECTIVE_HEADERS
@@ -55,32 +55,34 @@ XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_MAIN_INSTANCE \
 # http HEADERS
 #
 http_HEADERS += \
-$${STARA_SRC}/xos/app/console/protocol/xttp/base/main_opt.hpp \
-$${STARA_SRC}/xos/app/console/protocol/xttp/base/main.hpp \
-$${STARA_SRC}/xos/app/console/protocol/xttp/client/main_opt.hpp \
-$${STARA_SRC}/xos/app/console/protocol/xttp/client/main.hpp \
-$${STARA_SRC}/xos/app/console/protocol/xttp/server/main_opt.hpp \
-$${STARA_SRC}/xos/app/console/protocol/xttp/server/main.hpp \
+$${OMNA_SRC}/xos/app/console/protocol/http/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/protocol/http/base/main.hpp \
 \
-$${OMNA_SRC}/xos/app/console/protocol/xttp/main_opt.hpp \
-$${OMNA_SRC}/xos/app/console/protocol/xttp/main.hpp \
+$${OMNA_SRC}/xos/app/console/protocol/http/client/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/protocol/http/client/main.hpp \
 \
-$${OMNA_SRC}/xos/app/console/protocol/http/main_opt.hpp \
-$${OMNA_SRC}/xos/app/console/protocol/http/main.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/base/main.hpp \
 \
-$${OMNA_SRC}/xos/app/console/network/sockets/main_opt.hpp \
-$${OMNA_SRC}/xos/app/console/network/sockets/main.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/os/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/os/base/main.hpp \
 \
-$${OMNA_SRC}/xos/app/console/network/protocol/http/main_opt.hpp \
-$${OMNA_SRC}/xos/app/console/network/protocol/http/main.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/client/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/sockets/client/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/protocol/http/base/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/base/main.hpp \
+\
+$${OMNA_SRC}/xos/app/console/network/protocol/http/client/main_opt.hpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/client/main.hpp \
 \
 $${NADIR_SRC}/xos/console/main_main.hpp \
 
 # http SOURCES
 #
 http_SOURCES += \
-$${OMNA_SRC}/xos/app/console/network/protocol/http/main_opt.cpp \
-$${OMNA_SRC}/xos/app/console/network/protocol/http/main.cpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/client/main_opt.cpp \
+$${OMNA_SRC}/xos/app/console/network/protocol/http/client/main.cpp \
 \
 $${NADIR_SRC}/xos/console/main_main.cpp \
 
