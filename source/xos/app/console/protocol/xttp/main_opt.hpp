@@ -38,14 +38,14 @@
 
 #define XOS_PROTOCOL_XTTP_MAIN_OPTIONS_CHARS \
     XOS_PROTOCOL_XTTP_MAIN_OPTIONS_CHARS_EXTEND \
-    XOS_CONSOLE_MAIN_OPTIONS_CHARS \
+    XOS_APP_CONSOLE_MAIN_OPTIONS_CHARS \
 
 #define XOS_PROTOCOL_XTTP_MAIN_OPTIONS_OPTIONS \
     XOS_PROTOCOL_XTTP_MAIN_OPTIONS_OPTIONS_EXTEND \
-    XOS_CONSOLE_MAIN_OPTIONS_OPTIONS \
+    XOS_APP_CONSOLE_MAIN_OPTIONS_OPTIONS \
 
-#define XOS_PROTOCOL_XTTP_MAIN_ARUMENTS_CHARS 0
-#define XOS_PROTOCOL_XTTP_MAIN_ARUMENTS_ARGS 0
+#define XOS_APP_CONSOLE_PROTOCOL_XTTP_MAIN_ARGS 0
+#define XOS_APP_CONSOLE_PROTOCOL_XTTP_MAIN_ARGV 0,
 
 namespace xos {
 namespace app {
@@ -125,8 +125,12 @@ protected:
 
     /// ...arguments...
     virtual const char_t* arguments(const char_t**& args) {
-        args = XOS_PROTOCOL_XTTP_MAIN_ARUMENTS_ARGS;
-        return XOS_PROTOCOL_XTTP_MAIN_ARUMENTS_CHARS;
+        static const char_t* _args = XOS_APP_CONSOLE_PROTOCOL_XTTP_MAIN_ARGS;
+        static const char_t* _argv[] = {
+            XOS_APP_CONSOLE_PROTOCOL_XTTP_MAIN_ARGV
+            0};
+        argv = _argv;
+        return _args;
     }
 
 protected:

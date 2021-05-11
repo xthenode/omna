@@ -16,30 +16,36 @@
 ///   File: main_opt.hpp
 ///
 /// Author: $author$
-///   Date: 5/6/2021
+///   Date: 5/9/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPT_HPP
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPT_HPP
+#ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPT_HPP
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPT_HPP
 
-#include "xos/app/console/protocol/http/server/main.hpp"
-#include "xos/app/console/network/sockets/server/main.hpp"
+#include "xos/app/console/protocol/http/client/main.hpp"
+#include "xos/app/console/network/sockets/client/main.hpp"
 
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_CHARS_EXTEND \
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_CHARS_EXTEND \
 
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_OPTIONS_EXTEND \
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_OPTIONS_EXTEND \
 
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_CHARS \
-    XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPTIONS_CHARS_EXTEND \
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_CHARS \
+    XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_CHARS_EXTEND \
+    XOS_APP_CONSOLE_NETWORK_SOCKETS_CLIENT_MAIN_OPTIONS_CHARS_EXTEND \
     XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_CHARS_EXTEND \
+    XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_CHARS_EXTEND \
+    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS_EXTEND \
     XOS_APP_CONSOLE_VERSION_MAIN_OPTIONS_CHARS
 
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_OPTIONS \
-    XOS_APP_CONSOLE_NETWORK_SOCKETS_SERVER_MAIN_OPTIONS_OPTIONS_EXTEND \
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_OPTIONS \
+    XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_OPTIONS_EXTEND \
+    XOS_APP_CONSOLE_NETWORK_SOCKETS_CLIENT_MAIN_OPTIONS_OPTIONS_EXTEND \
     XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
+    XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_OPTIONS_EXTEND \
+    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
     XOS_APP_CONSOLE_VERSION_MAIN_OPTIONS_OPTIONS
 
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_ARGS 0
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_ARGV 0,
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_ARGS 0
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_ARGV 0,
 
 namespace xos {
 namespace app {
@@ -47,15 +53,15 @@ namespace console {
 namespace network {
 namespace protocol {
 namespace http {
-namespace server {
+namespace client {
 
 /// class main_optt
 template 
-<class TExtends = console::protocol::http::server::maint<console::protocol::http::server::main_optt
- <console::protocol::xttp::server::maint<console::protocol::xttp::server::main_optt
+<class TExtends = console::protocol::http::client::maint<console::protocol::http::client::main_optt
+ <console::protocol::xttp::client::maint<console::protocol::xttp::client::main_optt
  <console::protocol::http::base::maint<console::protocol::http::base::main_optt
  <console::protocol::xttp::base::maint<console::protocol::xttp::base::main_optt
- <console::network::sockets::server::maint<> > > > > > > > >, 
+ <console::network::sockets::client::maint< > > > > > > > > >, 
  class TImplements = typename TExtends::implements>
 
 class exported main_optt: virtual public TImplements, public TExtends {
@@ -93,15 +99,15 @@ protected:
     typedef typename extends::content_length_header_t content_length_header_t;
     typedef typename extends::content_t content_t;
 
-    typedef typename extends::response_status_t response_status_t;
-    typedef typename extends::response_reason_t response_reason_t;
-    typedef typename extends::response_line_t response_line_t;
-    typedef typename extends::response_t response_t;
-
     typedef typename extends::request_method_t request_method_t;
     typedef typename extends::request_resource_t request_resource_t;
     typedef typename extends::request_line_t request_line_t;
     typedef typename extends::request_t request_t;
+
+    typedef typename extends::response_status_t response_status_t;
+    typedef typename extends::response_reason_t response_reason_t;
+    typedef typename extends::response_line_t response_line_t;
+    typedef typename extends::response_t response_t;
 
     /// ...option...
     virtual int on_option
@@ -124,9 +130,9 @@ protected:
         return chars;
     }
     virtual const char_t* options(const struct option*& longopts) {
-        static const char_t* chars = XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_CHARS;
+        static const char_t* chars = XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_CHARS;
         static struct option optstruct[]= {
-            XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_OPTIONS
+            XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPTIONS_OPTIONS
             {0, 0, 0, 0}};
         longopts = optstruct;
         return chars;
@@ -134,9 +140,9 @@ protected:
 
     /// ...argument...
     virtual const char_t* arguments(const char_t**& argv) {
-        static const char_t* _args = XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_ARGS;
+        static const char_t* _args = XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_ARGS;
         static const char_t* _argv[] = {
-            XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_ARGV
+            XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_ARGV
             0};
         argv = _argv;
         return _args;
@@ -146,7 +152,7 @@ protected:
 }; /// class main_optt
 typedef main_optt<> main_opt;
 
-} /// namespace server
+} /// namespace client
 } /// namespace http
 } /// namespace protocol
 } /// namespace network
@@ -154,4 +160,4 @@ typedef main_optt<> main_opt;
 } /// namespace app
 } /// namespace xos
 
-#endif /// ndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_SERVER_MAIN_OPT_HPP
+#endif /// ndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_OPT_HPP

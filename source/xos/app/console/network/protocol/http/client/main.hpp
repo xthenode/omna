@@ -16,26 +16,24 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 5/3/2021
+///   Date: 5/9/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_HPP
-#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_HPP
+#ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_HPP
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_HPP
 
-#include "xos/app/console/network/protocol/sony/audio/control/client/main_opt.hpp"
+#include "xos/app/console/network/protocol/http/client/main_opt.hpp"
 
 namespace xos {
 namespace app {
 namespace console {
 namespace network {
 namespace protocol {
-namespace sony {
-namespace audio {
-namespace control {
+namespace http {
 namespace client {
 
 /// class maint
 template 
-<class TExtends = console::network::protocol::sony::audio::control::client::main_opt, 
+<class TExtends = main_opt, 
  class TImplements = typename TExtends::implements>
 
 class exported maint: virtual public TImplements, public TExtends {
@@ -67,13 +65,6 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
-    typedef typename extends::json_boolean_t json_boolean_t;
-    typedef typename extends::json_number_t json_number_t;
-    typedef typename extends::json_string_t json_string_t;
-    typedef typename extends::json_node_t json_node_t;
-    typedef typename extends::json_array_t json_array_t;
-    typedef typename extends::json_object_t json_object_t;
-
     typedef typename extends::content_type_t content_type_t;
     typedef typename extends::content_type_which_t content_type_which_t;
     typedef typename extends::content_type_header_t content_type_header_t;
@@ -84,87 +75,77 @@ protected:
     typedef typename extends::request_resource_t request_resource_t;
     typedef typename extends::request_line_t request_line_t;
     typedef typename extends::request_t request_t;
+
+    typedef typename extends::response_status_t response_status_t;
+    typedef typename extends::response_reason_t response_reason_t;
+    typedef typename extends::response_line_t response_line_t;
     typedef typename extends::response_t response_t;
-
-    /// ...set_before_write_request_run
-    virtual int set_before_write_request_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->set_connect_run(argc, argv, env);
-        return err;
-    }
-
-    /// after_set_..._run
-    virtual int after_set_request_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->unset_connect_run(argc, argv, env);
-        return err;
-    }
-    virtual int after_set_content_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->unset_connect_run(argc, argv, env);
-        return err;
-    }
-    virtual int after_set_content_type_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->unset_connect_run(argc, argv, env);
-        return err;
-    }
-    virtual int after_set_method_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->unset_connect_run(argc, argv, env);
-        return err;
-    }
-    virtual int after_set_resource_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->unset_connect_run(argc, argv, env);
-        return err;
-    }
-    virtual int after_set_parameter_run(int argc, char_t** argv, char** env) {
-        int err = 0;
-        err = this->unset_connect_run(argc, argv, env);
-        return err;
-    }
 
     /// ...send_request
     virtual int send_request(xos::network::sockets::interface& cn, int argc, char_t** argv, char_t**env) {
-        xos::network::sockets::writer writer(cn);
-        request_t &rq = this->request();
-        ssize_t amount = 0;
         int err = 0;
-        err = this->all_write_request(amount, writer, rq, argc, argv, env);
+        request_t& request = this->request();
+        err = all_send_request(cn, request, argc, argv, env);
+        return err;
+    }
+    virtual int send_request(xos::network::sockets::interface& cn, request_t& request, int argc, char_t** argv, char_t**env) {
+        int err = 0;
+        ssize_t count = 0;
+        xos::network::sockets::writer writer(cn);
+        request.write(count, writer);
+        return err;
+    }
+    virtual int before_send_request(xos::network::sockets::interface& cn, request_t& request, int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        return err;
+    }
+    virtual int after_send_request(xos::network::sockets::interface& cn, request_t& request, int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        return err;
+    }
+    virtual int all_send_request(xos::network::sockets::interface& cn, request_t& request, int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        if (!(err = before_send_request(cn, request, argc, argv, env))) {
+            int err2 = 0;
+            err = send_request(cn, request, argc, argv, env);
+            if ((err2 = after_send_request(cn, request, argc, argv, env))) {
+                if (!(err)) err = err2;
+            }
+        }
         return err;
     }
 
     /// ...recv_response
-    virtual int recv_response(xos::network::sockets::interface& cn, int argc, char_t** argv, char_t**env) {
-        xos::network::sockets::reader reader(cn);
-        response_t &rs = this->response();
+    virtual int recv_response(xos::network::sockets::interface& cn, int argc, char_t** argv, char_t** env) {
         int err = 0;
-        err = all_recv_response(rs, reader, argc, argv, env);
+        response_t& response = this->response();
+        err = all_recv_response(response, cn, argc, argv, env);
         return err;
     }
-    virtual int recv_response(response_t &rs, xos::network::sockets::reader& reader, int argc, char_t** argv, char_t**env) {
-        char_t c = 0; ssize_t count = 0;
+    virtual int recv_response(response_t& response, xos::network::sockets::interface& cn, int argc, char_t** argv, char_t** env) {
         int err = 0;
-        if ((rs.read_with_content(count, c, reader))) {
-            err = all_process_response(rs, reader, argc, argv, env);
+        char_t c = 0; 
+        ssize_t count = 0;
+        xos::network::sockets::reader reader(cn);
+        if ((response.read_with_content(count, c, reader))) {
+            err = all_process_response(response, reader, argc, argv, env);
         }
         return err;
     }
-    virtual int before_recv_response(response_t& response, xos::network::sockets::reader& reader, int argc, char_t** argv, char_t** env) {
+    virtual int before_recv_response(response_t& response, xos::network::sockets::interface& cn, int argc, char_t** argv, char_t** env) {
         int err = 0;
         return err;
     }
-    virtual int after_recv_response(response_t& response, xos::network::sockets::reader& reader, int argc, char_t** argv, char_t** env) {
+    virtual int after_recv_response(response_t& response, xos::network::sockets::interface& cn, int argc, char_t** argv, char_t** env) {
         int err = 0;
         return err;
     }
-    virtual int all_recv_response(response_t& response, xos::network::sockets::reader& reader, int argc, char_t** argv, char_t** env) {
+    virtual int all_recv_response(response_t& response, xos::network::sockets::interface& cn, int argc, char_t** argv, char_t** env) {
         int err = 0;
-        if (!(err = before_recv_response(response, reader, argc, argv, env))) {
+        if (!(err = before_recv_response(response, cn, argc, argv, env))) {
             int err2 = 0;
-            err = recv_response(response, reader, argc, argv, env);
-            if ((err2 = after_recv_response(response, reader, argc, argv, env))) {
+            err = recv_response(response, cn, argc, argv, env);
+            if ((err2 = after_recv_response(response, cn, argc, argv, env))) {
                 if (!(err)) err = err2;
             }
         }
@@ -237,13 +218,11 @@ protected:
 typedef maint<> main;
 
 } /// namespace client
-} /// namespace control
-} /// namespace audio
-} /// namespace sony
+} /// namespace http
 } /// namespace protocol
 } /// namespace network
 } /// namespace console
 } /// namespace app
 } /// namespace xos
 
-#endif /// ndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_HPP
+#endif /// ndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_CLIENT_MAIN_HPP

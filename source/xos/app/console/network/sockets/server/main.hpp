@@ -76,24 +76,27 @@ protected:
         xos::network::sockets::socklen_t& al = this->connect_addrlen();
         int err = 0;
 
-        if ((ep.attach(host, port))) {
-
-            if ((ac.open(tp))) {
-                
-                if ((ac.listen(ep))) {
+        do {
+            this->set_accept_restart(false);
+            if ((ep.attach(host, port))) {
+    
+                if ((ac.open(tp))) {
                     
-                    do {
-                        if ((ac.accept(cn, &ad, al))) {
-                            
-                            this->all_accept(cn, argc, argv, env);
-                            cn.close();
-                        }
-                    } while (!(this->accept_one() || this->accept_done() || this->accept_restart()));
+                    if ((ac.listen(ep))) {
+                        
+                        do {
+                            if ((ac.accept(cn, &ad, al))) {
+                                
+                                this->all_accept(cn, argc, argv, env);
+                                cn.close();
+                            }
+                        } while (!(this->accept_one() || this->accept_done() || this->accept_restart()));
+                    }
+                    ac.close();
                 }
-                ac.close();
+                ep.detach();
             }
-            ep.detach();
-        }
+        } while (this->accept_restart());
         return err;
     }
     virtual int before_accept(int argc, char_t** argv, char** env) {

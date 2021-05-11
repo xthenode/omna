@@ -16,38 +16,27 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 5/6/2021
+///   Date: 5/10/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef XOS_APP_CONSOLE_NETWORK_BASE_MAIN_HPP
-#define XOS_APP_CONSOLE_NETWORK_BASE_MAIN_HPP
+#ifndef XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_HPP
+#define XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_HPP
 
-#include "xos/app/console/network/base/main_opt.hpp"
-
-#define XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT "Hello\r\n"
-#define XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT_LENGTH "7"
-#define XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT_TYPE "text/plain"
-
-#define XOS_APP_CONSOLE_NETWORK_DEFAULT_HEADERS \
-    "Content-Type:" XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT_TYPE "\r\n" \
-    "Content-Length:" XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT_LENGTH "\r\n" \
-
-#define XOS_APP_CONSOLE_NETWORK_DEFAULT_REQUEST "GET / HTTP/1.0\r\n" \
-    XOS_APP_CONSOLE_NETWORK_DEFAULT_HEADERS "\r\n" \
-    XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT \
-
-#define XOS_APP_CONSOLE_NETWORK_DEFAULT_RESPONSE "HTTP/1.0 200 OK\r\n" \
-    XOS_APP_CONSOLE_NETWORK_DEFAULT_HEADERS "\r\n" \
-    XOS_APP_CONSOLE_NETWORK_DEFAULT_CONTENT \
+#include "xos/app/console/protocol/http/client/main_opt.hpp"
+#include "xos/protocol/http/response/status/codeof.hpp"
+#include "xos/protocol/http/response/status/reason.hpp"
+#include "xos/protocol/http/response/line.hpp"
+#include "xos/protocol/http/response/message.hpp"
 
 namespace xos {
 namespace app {
 namespace console {
-namespace network {
-namespace base {
+namespace protocol {
+namespace http {
+namespace client {
 
 /// class maint
 template 
-<class TExtends = console::network::base::main_optt<>, 
+<class TExtends = console::protocol::http::client::main_optt< >, 
  class TImplements = typename TExtends::implements>
 
 class exported maint: virtual public TImplements, public TExtends {
@@ -79,24 +68,37 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
-    /// default request / response
-    virtual string_t& default_request() const {
-        static string_t request(XOS_APP_CONSOLE_NETWORK_DEFAULT_REQUEST);
-        return request;
-    }
-    virtual string_t& default_response() const {
-        static string_t response(XOS_APP_CONSOLE_NETWORK_DEFAULT_RESPONSE);
-        return response;
+    typedef typename extends::content_type_t content_type_t;
+    typedef typename extends::content_type_which_t content_type_which_t;
+    typedef typename extends::content_type_header_t content_type_header_t;
+    typedef typename extends::content_length_header_t content_length_header_t;
+    typedef typename extends::content_t content_t;
+
+    typedef typename extends::request_method_t request_method_t;
+    typedef typename extends::request_resource_t request_resource_t;
+    typedef typename extends::request_line_t request_line_t;
+    typedef typename extends::request_t request_t;
+
+    typedef xos::protocol::http::response::status::code response_status_t;
+    typedef xos::protocol::http::response::status::reason response_reason_t;
+    typedef xos::protocol::http::response::line response_line_t;
+    typedef xos::protocol::http::response::message response_t;
+
+    /// response...
+    virtual response_t& response() const {
+        return (response_t&)response_;
     }
 
 protected:
+    response_t response_;
 }; /// class maint
 typedef maint<> main;
 
-} /// namespace base
-} /// namespace network
+} /// namespace client
+} /// namespace http
+} /// namespace protocol
 } /// namespace console
 } /// namespace app
 } /// namespace xos
 
-#endif /// ndef XOS_APP_CONSOLE_NETWORK_BASE_MAIN_HPP
+#endif /// ndef XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_HPP

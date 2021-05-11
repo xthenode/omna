@@ -21,7 +21,7 @@
 #ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_BASE_MAIN_OPT_HPP
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_BASE_MAIN_OPT_HPP
 
-#include "xos/app/console/network/sockets/base/main.hpp"
+#include "xos/app/console/network/sockets/os/base/main.hpp"
 #include "xos/app/console/protocol/sony/audio/control/base/main.hpp"
 
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_BASE_MAIN_OPTIONS_CHARS_EXTEND \
@@ -53,8 +53,9 @@ namespace base {
 
 /// class main_optt
 template 
-<class TExtends = console::network::sockets::base::maint<console::network::sockets::base::main_optt
- <console::protocol::sony::audio::control::base::maint<console::protocol::sony::audio::control::base::main_optt<> > > >, 
+<class TExtends = console::network::sockets::os::base::maint<console::network::sockets::os::base::main_optt
+ <console::network::sockets::base::maint<console::network::sockets::base::main_optt                                                            
+ <console::protocol::sony::audio::control::base::maint<console::protocol::sony::audio::control::base::main_optt<> > > > > >, 
  class TImplements = typename TExtends::implements>
 
 class exported main_optt: virtual public TImplements, public TExtends {

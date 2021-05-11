@@ -33,7 +33,7 @@ namespace base {
 
 /// class maint
 template 
-<class TExtends = main_opt, 
+<class TExtends = console::network::protocol::http::base::main_optt<>, 
  class TImplements = typename TExtends::implements>
 
 class exported maint: virtual public TImplements, public TExtends {
@@ -64,6 +64,12 @@ protected:
     typedef typename extends::in_reader_t in_reader_t;
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
+
+    typedef typename extends::content_type_t content_type_t;
+    typedef typename extends::content_type_which_t content_type_which_t;
+    typedef typename extends::content_type_header_t content_type_header_t;
+    typedef typename extends::content_length_header_t content_length_header_t;
+    typedef typename extends::content_t content_t;
 
 protected:
 }; /// class maint

@@ -28,8 +28,8 @@
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPT "respond"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTARG_REQUIRED MAIN_OPT_ARGUMENT_OPTIONAL
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTARG_RESULT 0
-#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTARG ""
-#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTUSE "Send http response"
+#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTARG "[file]"
+#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTUSE "Send http response [file]"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTVAL_S "s::"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTVAL_C 's'
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_RESPOND_OPTION \
@@ -41,7 +41,7 @@
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPT "ok"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTARG_REQUIRED MAIN_OPT_ARGUMENT_OPTIONAL
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTARG_RESULT 0
-#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTARG ""
+#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTARG "[code][:reason]"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTUSE "OK http response status"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTVAL_S "k::"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_OK_OPTVAL_C 'k'
@@ -54,7 +54,7 @@
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPT "not-found"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTARG_REQUIRED MAIN_OPT_ARGUMENT_OPTIONAL
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTARG_RESULT 0
-#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTARG ""
+#define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTARG "[code][:reason]"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTUSE "Not Found http response status"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTVAL_S "f::"
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_STATUS_NOT_FOUND_OPTVAL_C 'f'
@@ -77,12 +77,12 @@
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_CHARS \
    XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_CHARS_EXTEND \
    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS_EXTEND \
-   XOS_CONSOLE_MAIN_OPTIONS_CHARS
+   XOS_APP_CONSOLE_MAIN_OPTIONS_CHARS
 
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_OPTIONS \
    XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_OPTIONS_OPTIONS_EXTEND \
    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
-   XOS_CONSOLE_MAIN_OPTIONS_OPTIONS
+   XOS_APP_CONSOLE_MAIN_OPTIONS_OPTIONS
 
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_ARGS 0
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_SERVER_MAIN_ARGV 0,
@@ -129,16 +129,16 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
-    typedef typename extends::content_type_t content_type_t;
-    typedef typename extends::content_type_which_t content_type_which_t;
-    typedef typename extends::content_type_header_t content_type_header_t;
-    typedef typename extends::content_length_header_t content_length_header_t;
-    typedef typename extends::content_t content_t;
+    typedef xos::protocol::http::content::media::type::name content_type_t;
+    typedef xos::protocol::http::content::media::type::which_t content_type_which_t;
+    typedef xos::protocol::http::message::header::content::type content_type_header_t;
+    typedef xos::protocol::http::message::header::content::length content_length_header_t;
+    typedef xos::protocol::http::message::body::content content_t;
 
-    typedef typename extends::response_status_t response_status_t;
-    typedef typename extends::response_reason_t response_reason_t;
-    typedef typename extends::response_line_t response_line_t;
-    typedef typename extends::response_t response_t;
+    typedef xos::protocol::http::response::status::code response_status_t;
+    typedef xos::protocol::http::response::status::reason response_reason_t;
+    typedef xos::protocol::http::response::line response_line_t;
+    typedef xos::protocol::http::response::message response_t;
 
     /// ...option...
     virtual int on_respond_option

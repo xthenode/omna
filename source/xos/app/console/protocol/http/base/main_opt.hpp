@@ -60,11 +60,11 @@
 
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS \
    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS_EXTEND \
-   XOS_CONSOLE_MAIN_OPTIONS_CHARS
+   XOS_APP_CONSOLE_MAIN_OPTIONS_CHARS
 
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS \
    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
-   XOS_CONSOLE_MAIN_OPTIONS_OPTIONS
+   XOS_APP_CONSOLE_MAIN_OPTIONS_OPTIONS
 
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_ARGS 0
 #define XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_ARGV 0,
@@ -130,11 +130,11 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
-    typedef typename extends::content_type_t content_type_t;
-    typedef typename extends::content_type_which_t content_type_which_t;
-    typedef typename extends::content_type_header_t content_type_header_t;
-    typedef typename extends::content_length_header_t content_length_header_t;
-    typedef typename extends::content_t content_t;
+    typedef xos::protocol::http::content::media::type::name content_type_t;
+    typedef xos::protocol::http::content::media::type::which_t content_type_which_t;
+    typedef xos::protocol::http::message::header::content::type content_type_header_t;
+    typedef xos::protocol::http::message::header::content::length content_length_header_t;
+    typedef xos::protocol::http::message::body::content content_t;
 
     /// ...option...
     virtual int on_content_option

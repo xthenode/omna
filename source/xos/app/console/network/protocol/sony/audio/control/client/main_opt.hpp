@@ -34,14 +34,16 @@
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_OPTIONS_CHARS \
    XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_OPTIONS_CHARS_EXTEND \
    XOS_APP_CONSOLE_NETWORK_SOCKETS_CLIENT_MAIN_OPTIONS_CHARS_EXTEND \
-   XOS_PROTOCOL_HTTP_MAIN_REQUEST_OPTVAL_S \
-   XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_CHARS \
+   XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_REQUEST_OPTVAL_S \
+   XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_CHARS_EXTEND \
+   XOS_APP_CONSOLE_MAIN_OPTIONS_CHARS \
 
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_OPTIONS_OPTIONS \
    XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_OPTIONS_OPTIONS_EXTEND \
    XOS_APP_CONSOLE_NETWORK_SOCKETS_CLIENT_MAIN_OPTIONS_OPTIONS_EXTEND \
-   XOS_PROTOCOL_HTTP_MAIN_REQUEST_OPTION \
-   XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_OPTIONS \
+   XOS_APP_CONSOLE_PROTOCOL_HTTP_CLIENT_MAIN_REQUEST_OPTION \
+   XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
+   XOS_APP_CONSOLE_MAIN_OPTIONS_OPTIONS \
 
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_ARGS 0
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_SONY_AUDIO_CONTROL_CLIENT_MAIN_ARGV 0,
@@ -56,19 +58,14 @@ namespace audio {
 namespace control {
 namespace client {
 
-//console::network::client::main_optt<console::os::sockets::base::maint<> >
-//console::network::sockets::base::maint<console::network::sockets::base::main_optt
-//console::network::protocol::sony::audio::control::base::maint<console::network::protocol::sony::audio::control::base::main_optt<> >
-//console::protocol::sony::audio::control::base::maint<console::protocol::sony::audio::control::base::main_optt<> >
-
 /// class main_optt
 template 
 <class TExtends = console::network::sockets::client::maint<console::network::sockets::client::main_optt
- <console::network::client::main_optt<console::os::sockets::base::maint
- <console::protocol::sony::audio::control::client::maint<console::protocol::sony::audio::control::client::main_optt
- <console::protocol::http::client::maint<console::protocol::http::client::main_optt
- <console::protocol::xttp::client::maint<console::protocol::xttp::client::main_optt
- <console::network::protocol::sony::audio::control::base::maint<> > > > > > > > > > >, 
+ <console::network::protocol::sony::audio::control::base::maint<console::network::protocol::sony::audio::control::base::main_optt
+ <console::network::sockets::os::base::maint<console::network::sockets::os::base::main_optt
+ <console::network::sockets::base::maint<console::network::sockets::base::main_optt                                                            
+ <console::network::base::maint<console::network::base::main_optt                                                            
+ <console::protocol::sony::audio::control::client::maint<console::protocol::sony::audio::control::client::main_optt<> > > > > > > > > > > >, 
  class TImplements = typename TExtends::implements>
 
 class exported main_optt: virtual public TImplements, public TExtends {

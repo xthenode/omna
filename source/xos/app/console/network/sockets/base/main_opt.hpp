@@ -180,6 +180,11 @@ protected:
         }
         return err;
     }
+    virtual int unset_sockets_run(int argc, char_t** argv, char_t** env) {
+        int err = 0;
+        run_ = 0;
+        return err;
+    }
     virtual int set_sockets_run(int argc, char_t** argv, char_t** env) {
         int err = 0;
         run_ = &derives::all_sockets_run;

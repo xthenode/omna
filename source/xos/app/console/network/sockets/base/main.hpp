@@ -47,7 +47,7 @@ namespace base {
 
 /// class maint
 template 
-<class TExtends = main_opt, 
+<class TExtends = console::network::sockets::base::main_optt< >, 
  class TImplements = typename TExtends::implements>
 
 class exported maint: virtual public TImplements, public TExtends {
@@ -236,6 +236,7 @@ protected:
         int err = 0;
         char_t c = 0;
 
+        request.clear();
         if (!(err = this->recv_crlf2(request, c, cn, argc, argv, env))) {
             err = all_process_request(request, cn, argc, argv, env);
         }
@@ -326,6 +327,7 @@ protected:
         int err = 0;
         char_t c = 0;
 
+        response.clear();
         if (!(err = this->recv_crlf2(response, c, cn, argc, argv, env))) {
             err = all_process_response(response, cn, argc, argv, env);
         }

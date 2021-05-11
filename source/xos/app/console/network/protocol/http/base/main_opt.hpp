@@ -21,7 +21,27 @@
 #ifndef XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPT_HPP
 #define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPT_HPP
 
-#include "xos/app/console/main.hpp"
+#include "xos/app/console/protocol/http/base/main.hpp"
+#include "xos/app/console/network/sockets/os/base/main.hpp"
+
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS_EXTEND \
+
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
+
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS \
+    XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS_EXTEND \
+    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS_EXTEND \
+    XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_CHARS_EXTEND \
+    XOS_APP_CONSOLE_VERSION_MAIN_OPTIONS_CHARS
+
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS \
+    XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
+    XOS_APP_CONSOLE_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
+    XOS_APP_CONSOLE_NETWORK_SOCKETS_BASE_MAIN_OPTIONS_OPTIONS_EXTEND \
+    XOS_APP_CONSOLE_VERSION_MAIN_OPTIONS_OPTIONS
+
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_ARGS 0
+#define XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_ARGV 0,
 
 namespace xos {
 namespace app {
@@ -33,7 +53,9 @@ namespace base {
 
 /// class main_optt
 template 
-<class TExtends = xos::app::console::main, 
+<class TExtends = console::protocol::http::base::maint<console::protocol::http::base::main_optt
+ <console::protocol::xttp::base::maint<console::protocol::xttp::base::main_optt
+ <console::network::sockets::os::base::maint<console::network::sockets::os::base::main_optt<> > > > > >, 
  class TImplements = typename TExtends::implements>
 
 class exported main_optt: virtual public TImplements, public TExtends {
@@ -65,6 +87,50 @@ protected:
     typedef typename extends::out_writer_t out_writer_t;
     typedef typename extends::err_writer_t err_writer_t;
 
+    typedef typename extends::content_type_t content_type_t;
+    typedef typename extends::content_type_which_t content_type_which_t;
+    typedef typename extends::content_type_header_t content_type_header_t;
+    typedef typename extends::content_length_header_t content_length_header_t;
+    typedef typename extends::content_t content_t;
+
+    /// ...option...
+    virtual int on_option
+    (int optval, const char_t* optarg, const char_t* optname,
+     int optind, int argc, char_t**argv, char_t**env) {
+        int err = 0;
+        switch(optval) {
+        default:
+            err = extends::on_option(optval, optarg, optname, optind, argc, argv, env);
+        }
+        return err;
+    }
+    virtual const char_t* option_usage(const char_t*& optarg, const struct option* longopt) {
+        const char_t* chars = "";
+        switch(longopt->val) {
+        default:
+            chars = extends::option_usage(optarg, longopt);
+            break;
+        }
+        return chars;
+    }
+    virtual const char_t* options(const struct option*& longopts) {
+        static const char_t* chars = XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_CHARS;
+        static struct option optstruct[]= {
+            XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_OPTIONS_OPTIONS
+            {0, 0, 0, 0}};
+        longopts = optstruct;
+        return chars;
+    }
+
+    /// ...argument...
+    virtual const char_t* arguments(const char_t**& argv) {
+        static const char_t* _args = XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_ARGS;
+        static const char_t* _argv[] = {
+            XOS_APP_CONSOLE_NETWORK_PROTOCOL_HTTP_BASE_MAIN_ARGV
+            0};
+        argv = _argv;
+        return _args;
+    }
 protected:
 }; /// class main_optt
 typedef main_optt<> main_opt;
